@@ -11,66 +11,66 @@
 #INCLUDE <p18f4550.inc>		;ARQUIVO PADRÃO MICROCHIP PARA 18F4550
     
 ; CONFIG1L
-  CONFIG  PLLDIV = 1            ; PLL Prescaler Selection bits (No prescale (4 MHz oscillator input drives PLL directly))
-  CONFIG  CPUDIV = OSC1_PLL2    ; System Clock Postscaler Selection bits ([Primary Oscillator Src: /1][96 MHz PLL Src: /2])
-  CONFIG  USBDIV = 1            ; USB Clock Selection bit (used in Full-Speed USB mode only; UCFG:FSEN = 1) (USB clock source comes directly from the primary oscillator block with no postscale)
+  CONFIG  PLLDIV = 1            ; PLL PRESCALER SELECTION BITS (NO PRESCALE (4 MHZ OSCILLATOR INPUT DRIVES PLL DIRECTLY))
+  CONFIG  CPUDIV = OSC1_PLL2    ; SYSTEM CLOCK POSTSCALER SELECTION BITS ([PRIMARY OSCILLATOR SRC: /1][96 MHZ PLL SRC: /2])
+  CONFIG  USBDIV = 1            ; USB CLOCK SELECTION BIT (USED IN FULL-SPEED USB MODE ONLY; UCFG:FSEN = 1) (USB CLOCK SOURCE COMES DIRECTLY FROM THE PRIMARY OSCILLATOR BLOCK WITH NO POSTSCALE)
 
 ; CONFIG1H
-  CONFIG  FOSC = INTOSCIO_EC    ; Oscillator Selection bits (Internal oscillator, port function on RA6, EC used by USB (INTIO))
-  CONFIG  FCMEN = OFF           ; Fail-Safe Clock Monitor Enable bit (Fail-Safe Clock Monitor disabled)
-  CONFIG  IESO = OFF            ; Internal/External Oscillator Switchover bit (Oscillator Switchover mode disabled)
+  CONFIG  FOSC = INTOSCIO_EC    ; OSCILLATOR SELECTION BITS (INTERNAL OSCILLATOR, PORT FUNCTION ON RA6, EC USED BY USB (INTIO))
+  CONFIG  FCMEN = OFF           ; FAIL-SAFE CLOCK MONITOR ENABLE BIT (FAIL-SAFE CLOCK MONITOR DISABLED)
+  CONFIG  IESO = OFF            ; INTERNAL/EXTERNAL OSCILLATOR SWITCHOVER BIT (OSCILLATOR SWITCHOVER MODE DISABLED)
 
 ; CONFIG2L
-  CONFIG  PWRT = ON             ; Power-up Timer Enable bit (PWRT enabled)
-  CONFIG  BOR = ON              ; Brown-out Reset Enable bits (Brown-out Reset enabled in hardware only (SBOREN is disabled))
-  CONFIG  BORV = 3              ; Brown-out Reset Voltage bits (Minimum setting 2.05V)
-  CONFIG  VREGEN = OFF          ; USB Voltage Regulator Enable bit (USB voltage regulator disabled)
+  CONFIG  PWRT = ON             ; POWER-UP TIMER ENABLE BIT (PWRT ENABLED)
+  CONFIG  BOR = ON              ; BROWN-OUT RESET ENABLE BITS (BROWN-OUT RESET ENABLED IN HARDWARE ONLY (SBOREN IS DISABLED))
+  CONFIG  BORV = 3              ; BROWN-OUT RESET VOLTAGE BITS (MINIMUM SETTING 2.05V)
+  CONFIG  VREGEN = OFF          ; USB VOLTAGE REGULATOR ENABLE BIT (USB VOLTAGE REGULATOR DISABLED)
 
 ; CONFIG2H
-  CONFIG  WDT = OFF             ; Watchdog Timer Enable bit (WDT disabled (control is placed on the SWDTEN bit))
-  CONFIG  WDTPS = 32768         ; Watchdog Timer Postscale Select bits (1:32768)
+  CONFIG  WDT = OFF             ; WATCHDOG TIMER ENABLE BIT (WDT DISABLED (CONTROL IS PLACED ON THE SWDTEN BIT))
+  CONFIG  WDTPS = 32768         ; WATCHDOG TIMER POSTSCALE SELECT BITS (1:32768)
 
 ; CONFIG3H
-  CONFIG  CCP2MX = ON           ; CCP2 MUX bit (CCP2 input/output is multiplexed with RC1)
-  CONFIG  PBADEN = OFF          ; PORTB A/D Enable bit (PORTB<4:0> pins are configured as digital I/O on Reset)
-  CONFIG  LPT1OSC = OFF         ; Low-Power Timer 1 Oscillator Enable bit (Timer1 configured for higher power operation)
-  CONFIG  MCLRE = ON            ; MCLR Pin Enable bit (MCLR pin enabled; RE3 input pin disabled)
+  CONFIG  CCP2MX = ON           ; CCP2 MUX BIT (CCP2 INPUT/OUTPUT IS MULTIPLEXED WITH RC1)
+  CONFIG  PBADEN = OFF          ; PORTB A/D ENABLE BIT (PORTB<4:0> PINS ARE CONFIGURED AS DIGITAL I/O ON RESET)
+  CONFIG  LPT1OSC = OFF         ; LOW-POWER TIMER 1 OSCILLATOR ENABLE BIT (TIMER1 CONFIGURED FOR HIGHER POWER OPERATION)
+  CONFIG  MCLRE = ON            ; MCLR PIN ENABLE BIT (MCLR PIN ENABLED; RE3 INPUT PIN DISABLED)
 
 ; CONFIG4L
-  CONFIG  STVREN = ON           ; Stack Full/Underflow Reset Enable bit (Stack full/underflow will cause Reset)
-  CONFIG  LVP = OFF             ; Single-Supply ICSP Enable bit (Single-Supply ICSP disabled)
-  CONFIG  ICPRT = ON            ; Dedicated In-Circuit Debug/Programming Port (ICPORT) Enable bit (ICPORT enabled)
-  CONFIG  XINST = OFF           ; Extended Instruction Set Enable bit (Instruction set extension and Indexed Addressing mode disabled (Legacy mode))
+  CONFIG  STVREN = ON           ; STACK FULL/UNDERFLOW RESET ENABLE BIT (STACK FULL/UNDERFLOW WILL CAUSE RESET)
+  CONFIG  LVP = OFF             ; SINGLE-SUPPLY ICSP ENABLE BIT (SINGLE-SUPPLY ICSP DISABLED)
+  CONFIG  ICPRT = ON            ; DEDICATED IN-CIRCUIT DEBUG/PROGRAMMING PORT (ICPORT) ENABLE BIT (ICPORT ENABLED)
+  CONFIG  XINST = OFF           ; EXTENDED INSTRUCTION SET ENABLE BIT (INSTRUCTION SET EXTENSION AND INDEXED ADDRESSING MODE DISABLED (LEGACY MODE))
 
 ; CONFIG5L
-  CONFIG  CP0 = OFF             ; Code Protection bit (Block 0 (000800-001FFFh) is not code-protected)
-  CONFIG  CP1 = OFF             ; Code Protection bit (Block 1 (002000-003FFFh) is not code-protected)
-  CONFIG  CP2 = OFF             ; Code Protection bit (Block 2 (004000-005FFFh) is not code-protected)
-  CONFIG  CP3 = OFF             ; Code Protection bit (Block 3 (006000-007FFFh) is not code-protected)
+  CONFIG  CP0 = OFF             ; CODE PROTECTION BIT (BLOCK 0 (000800-001FFFH) IS NOT CODE-PROTECTED)
+  CONFIG  CP1 = OFF             ; CODE PROTECTION BIT (BLOCK 1 (002000-003FFFH) IS NOT CODE-PROTECTED)
+  CONFIG  CP2 = OFF             ; CODE PROTECTION BIT (BLOCK 2 (004000-005FFFH) IS NOT CODE-PROTECTED)
+  CONFIG  CP3 = OFF             ; CODE PROTECTION BIT (BLOCK 3 (006000-007FFFH) IS NOT CODE-PROTECTED)
 
 ; CONFIG5H
-  CONFIG  CPB = OFF             ; Boot Block Code Protection bit (Boot block (000000-0007FFh) is not code-protected)
-  CONFIG  CPD = OFF             ; Data EEPROM Code Protection bit (Data EEPROM is not code-protected)
+  CONFIG  CPB = OFF             ; BOOT BLOCK CODE PROTECTION BIT (BOOT BLOCK (000000-0007FFH) IS NOT CODE-PROTECTED)
+  CONFIG  CPD = OFF             ; DATA EEPROM CODE PROTECTION BIT (DATA EEPROM IS NOT CODE-PROTECTED)
 
 ; CONFIG6L
-  CONFIG  WRT0 = OFF            ; Write Protection bit (Block 0 (000800-001FFFh) is not write-protected)
-  CONFIG  WRT1 = OFF            ; Write Protection bit (Block 1 (002000-003FFFh) is not write-protected)
-  CONFIG  WRT2 = OFF            ; Write Protection bit (Block 2 (004000-005FFFh) is not write-protected)
-  CONFIG  WRT3 = OFF            ; Write Protection bit (Block 3 (006000-007FFFh) is not write-protected)
+  CONFIG  WRT0 = OFF            ; WRITE PROTECTION BIT (BLOCK 0 (000800-001FFFH) IS NOT WRITE-PROTECTED)
+  CONFIG  WRT1 = OFF            ; WRITE PROTECTION BIT (BLOCK 1 (002000-003FFFH) IS NOT WRITE-PROTECTED)
+  CONFIG  WRT2 = OFF            ; WRITE PROTECTION BIT (BLOCK 2 (004000-005FFFH) IS NOT WRITE-PROTECTED)
+  CONFIG  WRT3 = OFF            ; WRITE PROTECTION BIT (BLOCK 3 (006000-007FFFH) IS NOT WRITE-PROTECTED)
 
 ; CONFIG6H
-  CONFIG  WRTC = OFF            ; Configuration Register Write Protection bit (Configuration registers (300000-3000FFh) are not write-protected)
-  CONFIG  WRTB = OFF            ; Boot Block Write Protection bit (Boot block (000000-0007FFh) is not write-protected)
-  CONFIG  WRTD = OFF            ; Data EEPROM Write Protection bit (Data EEPROM is not write-protected)
+  CONFIG  WRTC = OFF            ; CONFIGURATION REGISTER WRITE PROTECTION BIT (CONFIGURATION REGISTERS (300000-3000FFH) ARE NOT WRITE-PROTECTED)
+  CONFIG  WRTB = OFF            ; BOOT BLOCK WRITE PROTECTION BIT (BOOT BLOCK (000000-0007FFH) IS NOT WRITE-PROTECTED)
+  CONFIG  WRTD = OFF            ; DATA EEPROM WRITE PROTECTION BIT (DATA EEPROM IS NOT WRITE-PROTECTED)
 
 ; CONFIG7L
-  CONFIG  EBTR0 = OFF           ; Table Read Protection bit (Block 0 (000800-001FFFh) is not protected from table reads executed in other blocks)
-  CONFIG  EBTR1 = OFF           ; Table Read Protection bit (Block 1 (002000-003FFFh) is not protected from table reads executed in other blocks)
-  CONFIG  EBTR2 = OFF           ; Table Read Protection bit (Block 2 (004000-005FFFh) is not protected from table reads executed in other blocks)
-  CONFIG  EBTR3 = OFF           ; Table Read Protection bit (Block 3 (006000-007FFFh) is not protected from table reads executed in other blocks)
+  CONFIG  EBTR0 = OFF           ; TABLE READ PROTECTION BIT (BLOCK 0 (000800-001FFFH) IS NOT PROTECTED FROM TABLE READS EXECUTED IN OTHER BLOCKS)
+  CONFIG  EBTR1 = OFF           ; TABLE READ PROTECTION BIT (BLOCK 1 (002000-003FFFH) IS NOT PROTECTED FROM TABLE READS EXECUTED IN OTHER BLOCKS)
+  CONFIG  EBTR2 = OFF           ; TABLE READ PROTECTION BIT (BLOCK 2 (004000-005FFFH) IS NOT PROTECTED FROM TABLE READS EXECUTED IN OTHER BLOCKS)
+  CONFIG  EBTR3 = OFF           ; TABLE READ PROTECTION BIT (BLOCK 3 (006000-007FFFH) IS NOT PROTECTED FROM TABLE READS EXECUTED IN OTHER BLOCKS)
 
 ; CONFIG7H
-  CONFIG  EBTRB = OFF           ; Boot Block Table Read Protection bit (Boot block (000000-0007FFh) is not protected from table reads executed in other blocks)
+  CONFIG  EBTRB = OFF           ; BOOT BLOCK TABLE READ PROTECTION BIT (BOOT BLOCK (000000-0007FFH) IS NOT PROTECTED FROM TABLE READS EXECUTED IN OTHER BLOCKS)
 
 	
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
