@@ -1,14 +1,14 @@
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ;*               PLACA DE APRENDIZAGEM: USTART FOR PIC		   *
-;*		 PROGRAMA«√O EM ASSEMBLY DO PIC18F4550		   *
+;*		 PROGRAMA√á√ÉO EM ASSEMBLY DO PIC18F4550		   *
 ;*			AUTOR: MARISMAR COSTA                      *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-;*                     ARQUIVOS DE DEFINI«’ES                      *
+;*                     ARQUIVOS DE DEFINI√á√ïES                      *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *	
 LIST p=18f4550, r=hex  
-#INCLUDE <p18f4550.inc>		;ARQUIVO PADR√O MICROCHIP PARA 18F4550
+#INCLUDE <p18f4550.inc>		;ARQUIVO PADR√ÉO MICROCHIP PARA 18F4550
     
 ; CONFIG1L
   CONFIG  PLLDIV = 1            ; PLL PRESCALER SELECTION BITS (NO PRESCALE (4 MHZ OSCILLATOR INPUT DRIVES PLL DIRECTLY))
@@ -74,41 +74,41 @@ LIST p=18f4550, r=hex
 
 	
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-;*                         VARI¡VEIS                               *
+;*                         VARI√ÅVEIS                               *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-; DEFINI«√O DOS NOMES E ENDERE«OS DE TODAS AS VARI¡VEIS UTILIZADAS 
+; DEFINI√á√ÉO DOS NOMES E ENDERE√áOS DE TODAS AS VARI√ÅVEIS UTILIZADAS 
 ; PELO SISTEMA
 
-	CBLOCK	0x10		;ENDERE«O INICIAL DA MEM”RIA DE USU¡RIO
-		W_TEMP		;REGISTRADORES TEMPOR¡RIOS PARA USO
-		STATUS_TEMP	;JUNTO ¿S INTERRUP«’ES
+	CBLOCK	0x10		;ENDERE√áO INICIAL DA MEM√ìRIA DE USU√ÅRIO
+		W_TEMP		;REGISTRADORES TEMPOR√ÅRIOS PARA USO
+		STATUS_TEMP	;JUNTO √ÄS INTERRUP√á√ïES
 
-		;NOVAS VARI¡VEIS
+		;NOVAS VARI√ÅVEIS
 		DELAY1		
 		DELAY2
 		DELAY3
 
-	ENDC			;FIM DO BLOCO DE MEM”RIA
+	ENDC			;FIM DO BLOCO DE MEM√ìRIA
 
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ;*			      VETORES                              *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
-	ORG 0x0000		;ENDERE«O INICIAL DO PROGRAMA
+	ORG 0x0000		;ENDERE√áO INICIAL DO PROGRAMA
 	GOTO INICIO
     
-	ORG 0x0008		;ENDERE«O DA INTERRUP«√O DE ALTA PRIORIDADE
+	ORG 0x0008		;ENDERE√áO DA INTERRUP√á√ÉO DE ALTA PRIORIDADE
 	GOTO HIGH_INT
     
-	ORG 0x0018		;ENDERE«O DA INTERRUP«√O DE BAIXA PRIORIDADE
+	ORG 0x0018		;ENDERE√áO DA INTERRUP√á√ÉO DE BAIXA PRIORIDADE
 	GOTO LOW_INT
     
     
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-;*            INÕCIO DA INTERRUP«√O DE ALTA PRIORIDADE             *
+;*            IN√çCIO DA INTERRUP√á√ÉO DE ALTA PRIORIDADE             *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-; ENDERE«O DE DESVIO DAS INTERRUP«’ES. A PRIMEIRA TAREFA … SALVAR OS
-; VALORES DE "W" E "STATUS" PARA RECUPERA«√O FUTURA
+; ENDERE√áO DE DESVIO DAS INTERRUP√á√ïES. A PRIMEIRA TAREFA √â SALVAR OS
+; VALORES DE "W" E "STATUS" PARA RECUPERA√á√ÉO FUTURA
     
 HIGH_INT:
 	MOVWF	W_TEMP		;COPIA W PARA W_TEMP
@@ -116,16 +116,16 @@ HIGH_INT:
 	MOVWF	STATUS_TEMP	;COPIA STATUS PARA STATUS_TEMP
 
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-;*            ROTINA DE INTERRUP«√O DE ALTA PRIORIDADE             *
+;*            ROTINA DE INTERRUP√á√ÉO DE ALTA PRIORIDADE             *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-; AQUI SER√O ESCRITAS AS ROTINAS DE RECONHECIMENTO E TRATAMENTO DAS
-; INTERRUP«’ES
+; AQUI SER√ÉO ESCRITAS AS ROTINAS DE RECONHECIMENTO E TRATAMENTO DAS
+; INTERRUP√á√ïES
 
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-;*       ROTINA DE SAÕDA DA INTERRUP«√O DE ALTA PRIORIDADE         *
+;*       ROTINA DE SA√çDA DA INTERRUP√á√ÉO DE ALTA PRIORIDADE         *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ; OS VALORES DE "W" E "STATUS" DEVEM SER RECUPERADOS ANTES DE 
-; RETORNAR DA INTERRUP«√O
+; RETORNAR DA INTERRUP√á√ÉO
 
 END_INT:
 	SWAPF	STATUS_TEMP,W
@@ -136,10 +136,10 @@ END_INT:
     
 	
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-;*            INÕCIO DA INTERRUP«√O DE BAIXA PRIORIDADE            *
+;*            IN√çCIO DA INTERRUP√á√ÉO DE BAIXA PRIORIDADE            *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-; ENDERE«O DE DESVIO DAS INTERRUP«’ES. A PRIMEIRA TAREFA … SALVAR OS
-; VALORES DE "W" E "STATUS" PARA RECUPERA«√O FUTURA
+; ENDERE√áO DE DESVIO DAS INTERRUP√á√ïES. A PRIMEIRA TAREFA √â SALVAR OS
+; VALORES DE "W" E "STATUS" PARA RECUPERA√á√ÉO FUTURA
 	
 LOW_INT:
 	MOVWF	W_TEMP		;COPIA W PARA W_TEMP
@@ -147,18 +147,18 @@ LOW_INT:
 	MOVWF	STATUS_TEMP	;COPIA STATUS PARA STATUS_TEMP
 
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-;*           ROTINA DE INTERRUP«√O DE BAIXA PRIORIDADE             *
+;*           ROTINA DE INTERRUP√á√ÉO DE BAIXA PRIORIDADE             *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-; AQUI SER√O ESCRITAS AS ROTINAS DE RECONHECIMENTO E TRATAMENTO DAS
-; INTERRUP«’ES
+; AQUI SER√ÉO ESCRITAS AS ROTINAS DE RECONHECIMENTO E TRATAMENTO DAS
+; INTERRUP√á√ïES
 	
 	NOP
 	
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-;*      ROTINA DE SAÕDA DA INTERRUP«√O DE BAIXA PRIORIDADE         *
+;*      ROTINA DE SA√çDA DA INTERRUP√á√ÉO DE BAIXA PRIORIDADE         *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ; OS VALORES DE "W" E "STATUS" DEVEM SER RECUPERADOS ANTES DE 
-; RETORNAR DA INTERRUP«√O
+; RETORNAR DA INTERRUP√á√ÉO
 	
 	SWAPF	STATUS_TEMP,W
 	MOVWF	STATUS		;MOVE STATUS_TEMP PARA STATUS
@@ -169,8 +169,8 @@ LOW_INT:
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ;*	            	 ROTINAS E SUBROTINAS                      *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-; CADA ROTINA OU SUBROTINA DEVE POSSUIR A DESCRI«√O DE FUNCIONAMENTO
-; E UM NOME COERENTE ¿S SUAS FUN«’ES.
+; CADA ROTINA OU SUBROTINA DEVE POSSUIR A DESCRI√á√ÉO DE FUNCIONAMENTO
+; E UM NOME COERENTE √ÄS SUAS FUN√á√ïES.
 
 SUBROTINA1
 
@@ -184,7 +184,7 @@ SUBROTINA1
 	
 INICIO:
 	;INTCON (1,2 e 3) funcionam de acordo com os valores encontrados em RCON,IPEN
-	;Neste caso, RCON,IPEN = 0 (incializaÁ„o padr„o)
+	;Neste caso, RCON,IPEN = 0 (incializa√ß√£o padr√£o)
 	MOVLW	B'00100001'
 	MOVWF	T0CON
 	
@@ -197,7 +197,7 @@ INICIO:
 	;INTCON2,TMR0IP define se o estouro do timer desvia para hi_int ou low_int
 	BSF	    INTCON2,TMR0IP ; Timer 0 - INTCON2,TMR0IP = 1 - Alta prioridade
 	BSF	    T0CON,TMR0ON   ; Timer 0 - Habilita Timer0
-	BCF	    INTCON,GIE     ; Habilita interrupÁıes globais
+	BCF	    INTCON,GIE     ; Habilita interrup√ß√µes globais
 		
 	CLRF    PORTC		; INICIALIZA PORTC
 	CLRF    LATC 
@@ -212,9 +212,9 @@ INICIO:
 	MOVWF   ADCON1		; PINOS DE E/S DIGITAL 
 	MOVLW   0CFh ;
 	MOVLW   B'00000000'
-	MOVWF   TRISB		;SETA AS PORTAS COMO ENTRADA OU SAÕDA
+	MOVWF   TRISB		;SETA AS PORTAS COMO ENTRADA OU SA√çDA
 
-	;CONFIGURA«√O DO SPI MODE
+	;CONFIGURA√á√ÉO DO SPI MODE
 	MOVLW   B'00110000'
 	MOVWF   SSPCON1		; CONTROLE DO SPI MODE
 	MOVLW   B'11000000'
@@ -222,12 +222,12 @@ INICIO:
 
 	; CONFIGURANDO O CLOCK
 	MOVLW   B'01100111'
-	MOVWF   OSCCON		;CONFIGURA O MODO DE OPERA«√O DO CLOCK INTERNO
+	MOVWF   OSCCON		;CONFIGURA O MODO DE OPERA√á√ÉO DO CLOCK INTERNO
 	MOVLW   B'10000000'
 	MOVWF   OSCTUNE		;REGISTRADOR QUE CALIBRA A VELOCIDADE DO CLOCK
 
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-;*                     INICIALIZA«√O DAS VARI¡VEIS                 *
+;*                     INICIALIZA√á√ÉO DAS VARI√ÅVEIS                 *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	
 	
@@ -235,11 +235,11 @@ INICIO:
 ;*                     ROTINA PRINCIPAL                            *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 MAIN
-	; Serial Data Out (SDO) ? RC7/RX/DT/SDO
-	; Serial Clock (SCK) ? RB1/AN10/INT1/SCK/SCL
-	; CKE E CKP CONTROLAM O MODO DE OPERA«√O DO CLOCK DO MASTER
+	; Serial Data Out (SDO) - RC7/RX/DT/SDO
+	; Serial Clock (SCK) - RB1/AN10/INT1/SCK/SCL
+	; CKE E CKP CONTROLAM O MODO DE OPERA√á√ÉO DO CLOCK DO MASTER
 	; CKE = 1, CKP = 1 ESCOLHIDO POR MARISMAR
-	BSF	LATA,2	    ; TESTE DE VELOCIDADE DE INSTRU«√O
+	BSF	LATA,2	    ; TESTE DE VELOCIDADE DE INSTRU√á√ÉO
 	BCF	LATA,2
 	; TESTANDO ENVIO DE DADOS POR SPI
 	MOVLW   .6
