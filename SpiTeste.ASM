@@ -116,21 +116,44 @@ INICIO:
     MOVWF   SSPSTAT		; LEITURA DO STATUS
     
     ;TENTATIVA DE AJUSTAR O CLOCK
-    MOVLW   B'01100111'
+    MOVLW   B'00010111'
     MOVWF   OSCCON
-    MOVLW   B'10000000'
+    MOVLW   B'10010000'
     MOVWF   OSCTUNE
+    
+    ;MOVLW   B'01100111'
+    ;MOVWF   OSCCON
+    ;MOVLW   B'10000000'
+    ;MOVWF   OSCTUNE
     
 loop
     ;nop   
-    bsf	LATA,2
-    bcf	LATA,2
-    ; Serial Data Out (SDO) – RC7/RX/DT/SDO
-    ; Serial Clock (SCK) – RB1/AN10/INT1/SCK/SCL
+    BSF	    LATA,2
+    BCF	    LATA,2
+    ; Serial Data Out (SDO) ? RC7/RX/DT/SDO
+    ; Serial Clock (SCK) ? RB1/AN10/INT1/SCK/SCL
     ; CKE E CKP CONTROLAM O MODO DE OPERAÇÃO DO CLOCK DO MASTER
     ; CKE = 1, CKP = 1 ESCOLHIDO POR MARISMAR
-    MOVLW   .6
+    
+    ;MOVLW   B'00111000'
+    ;MOVWF   SSPBUF
+    ;MOVLW   B'01100100'
+    ;MOVWF   SSPBUF
+    MOVLW   B'10111011'
     MOVWF   SSPBUF
+    
+    BCF	    INTCON,TMR0IF
+DELAY1
+    BTFSS   INTCON,TMR0IF
+    GOTO    DELAY1
+    
+    ;MOVLW   B'01000010'
+    ;MOVWF   SSPBUF
+    
+    ;BCF	    INTCON,TMR0IF
+;DELAY
+    ;BTFSS   INTCON,TMR0IF
+    ;GOTO    DELAY
     
     GOTO loop
 end
