@@ -11,7 +11,8 @@
 #INCLUDE <p18f4550.inc>		;ARQUIVO PADRÃO MICROCHIP PARA 18F4550
     
 ; CONFIG1H
-  CONFIG  FOSC = INTOSCIO_EC    ; OSCILLATOR SELECTION BITS (INTERNAL OSCILLATOR, PORT FUNCTION ON RA6, EC USED BY USB (INTIO))
+  CONFIG  FOSC = HS
+  CONFIG  CPUDIV = OSC1_PLL2
   	
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ;*                         VARIÁVEIS                               *
@@ -146,20 +147,20 @@ INICIO:
 	
 	MOVLW	B'00001110'
 	MOVWF	ADCON1
-	MOVLW	B'00000001'
-	MOVWF	ADCON0
-	MOVLW	B'00011110'
+	MOVLW	B'00000110'
 	MOVWF	ADCON2
 	MOVLW	B'00000001'
-	MOVWF	TRISA
-	CLRF	TRISB
-    
+	MOVWF	ADCON0
+	MOVLW	B'00000001'
+	MOVWF	TRISA    
 
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ;*                     INICIALIZAÇÃO DAS VARIÁVEIS                 *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	
-	CLRF	LATB
+	CLRF	PORTA
+	CLRF	MAIOR_VALOR
+	CLRF	LATA
 	
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ;*                     ROTINA PRINCIPAL                            *
@@ -176,12 +177,14 @@ FIM_CONVERSAO
 	CPFSLT	MAIOR_VALOR	;TESTA SE O NOVO VALOR CONVERTIDO É MAIOR QUE O MAIOR ANTERIORMENTE SALVO E DESVIA 
 	GOTO	NOVO_MENOR	;SE NÃO, RETORNA AO MAIN
 	MOVWF	MAIOR_VALOR	;ATUALIZA O MAIOR VALOR
-    	BSF	LATB,0		;ACENDE LED
+    	BSF	LATA,1		;ACENDE LED
 	GOTO	MAIN
 	
 NOVO_MENOR
-	BCF	LATB,0		;APAGA LED
-	GOTO MAIN
+	MOVF	ADRESH,0
+	CPFSEQ	MAIOR_VALOR	;VERIFICA SE É IGUAL E DESVIA
+	BCF	LATA,0		;APAGA LED SE FOR MENOR
+	GOTO MAIN		;RETORNA AO MAIN SE FOR IGUAL, SEM APAGAR O LED
 
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ;*                       FIM DO PROGRAMA                           *
