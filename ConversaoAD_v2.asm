@@ -11,9 +11,8 @@
 #INCLUDE <p18f4550.inc>		;ARQUIVO PADRÃO MICROCHIP PARA 18F4550
     
 ; CONFIG1H
-  CONFIG  FOSC = HS		;TESTAR CONFIGURAÇÕES DO LIVRO
-  CONFIG  CPUDIV = OSC1_PLL2
-  	
+  CONFIG    LVP = OFF
+  CONFIG  FOSC = INTOSCIO_EC    ; OSCILLATOR SELECTION BITS (INTERNAL OSCILLATOR, PORT FUNCTION ON RA6, EC USED BY USB (INTIO))	
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ;*                         VARIÁVEIS                               *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -144,24 +143,24 @@ SUBROTINA1
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	
 INICIO:
-	
-	MOVLW	B'00001110'
-	MOVWF	ADCON1
-	MOVLW	B'00000110'
+    
+	CLRF PORTA ; Initialize PORTA by
+	CLRF LATA ; Alternate method
+	MOVLW B'00001110' ; Configure A/D
+	MOVWF ADCON1 ; for digital inputs
+	MOVLW B'00000000' ; Configure comparators
+	MOVWF CMCON ; for digital input
+	MOVLW B'00000001' ; Value used to
+	MOVWF TRISA ; Set RA<3:0> as inputs
+    	MOVLW	B'00000110'
 	MOVWF	ADCON2
 	MOVLW	B'00000001'
 	MOVWF	ADCON0
-	MOVLW	B'00000001'
-	MOVWF	TRISA    
-	CLRF	INTCON
-	CLRF	PORTA
-	CLRF	LATA
+    
 
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ;*                     INICIALIZAÇÃO DAS VARIÁVEIS                 *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	
-	CLRF	MAIOR_VALOR
 	
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ;*                     ROTINA PRINCIPAL                            *
@@ -173,19 +172,20 @@ MAIN
 FIM_CONVERSAO
 	BTFSC	ADCON0,1	;VERIFICA SE A CONVERSAO TERMINOU
 	GOTO	FIM_CONVERSAO
-	
+
+	;BTG	LATA,1
 	MOVF	ADRESH,0	;MOVE O VALOR DA CONVERSAO PARA WREG
 	CPFSLT	MAIOR_VALOR	;TESTA SE O NOVO VALOR CONVERTIDO É MAIOR QUE O MAIOR ANTERIORMENTE SALVO E DESVIA 
 	GOTO	NOVO_MENOR	;SE NÃO, RETORNA AO MAIN
 	MOVWF	MAIOR_VALOR	;ATUALIZA O MAIOR VALOR
-    	BSF	LATA,1		;ACENDE LED
+    	BSF	LATA,2		;ACENDE LED
 	GOTO	MAIN
 	
 NOVO_MENOR
 	MOVF	ADRESH,0
-	CPFSEQ	MAIOR_VALOR	;VERIFICA SE É IGUAL E DESVIA
-	BCF	LATA,1		;APAGA LED SE FOR MENOR
-	GOTO MAIN		;RETORNA AO MAIN SE FOR IGUAL, SEM APAGAR O LED
+	CPFSEQ	MAIOR_VALOR
+	BCF	LATA,2		;APAGA LED
+	GOTO	MAIN
 
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ;*                       FIM DO PROGRAMA                           *
