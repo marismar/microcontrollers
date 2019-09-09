@@ -153,14 +153,15 @@ INICIO:
 	MOVWF	ADCON0
 	MOVLW	B'00000001'
 	MOVWF	TRISA    
+	CLRF	INTCON
+	CLRF	PORTA
+	CLRF	LATA
 
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ;*                     INICIALIZAÇÃO DAS VARIÁVEIS                 *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	
-	CLRF	PORTA
 	CLRF	MAIOR_VALOR
-	CLRF	LATA
 	
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ;*                     ROTINA PRINCIPAL                            *
