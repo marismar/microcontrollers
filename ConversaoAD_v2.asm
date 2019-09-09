@@ -11,7 +11,7 @@
 #INCLUDE <p18f4550.inc>		;ARQUIVO PADRÃO MICROCHIP PARA 18F4550
     
 ; CONFIG1H
-  CONFIG  FOSC = HS
+  CONFIG  FOSC = HS		;TESTAR CONFIGURAÇÕES DO LIVRO
   CONFIG  CPUDIV = OSC1_PLL2
   	
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -183,7 +183,7 @@ FIM_CONVERSAO
 NOVO_MENOR
 	MOVF	ADRESH,0
 	CPFSEQ	MAIOR_VALOR	;VERIFICA SE É IGUAL E DESVIA
-	BCF	LATA,0		;APAGA LED SE FOR MENOR
+	BCF	LATA,1		;APAGA LED SE FOR MENOR
 	GOTO MAIN		;RETORNA AO MAIN SE FOR IGUAL, SEM APAGAR O LED
 
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
