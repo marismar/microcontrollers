@@ -36,6 +36,28 @@
 	ENDC			;FIM DO BLOCO DE MEMÓRIA
 
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+;*                        FLAGS INTERNOS                           *
+;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+; DEFINIÇÃO DE TODOS OS FLAGS UTILIZADOS PELO SISTEMA
+
+;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+;*                         CONSTANTES                              *
+;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+; DEFINIÇÃO DE TODAS AS CONSTANTES UTILIZADAS PELO SISTEMA
+
+;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+;*                           ENTRADAS                              *
+;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+; DEFINIÇÃO DE TODOS OS PINOS QUE SERÃO UTILIZADOS COMO ENTRADA
+; RECOMENDAMOS TAMBÉM COMENTAR O SIGNIFICADO DE SEUS ESTADOS (0 E 1)
+
+;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+;*                           SAÍDAS                                *
+;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+; DEFINIÇÃO DE TODOS OS PINOS QUE SERÃO UTILIZADOS COMO SAÍDA
+; RECOMENDAMOS TAMBÉM COMENTAR O SIGNIFICADO DE SEUS ESTADOS (0 E 1)
+
+;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ;*			      VETORES                              *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
