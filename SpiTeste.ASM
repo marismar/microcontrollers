@@ -79,7 +79,7 @@ INICIO:
     bcf	    T0CON,T0CS    
     bcf	    T0CON,T0PS2   ;0
     bcf	    T0CON,T0PS1   ;0		DEFINE PRESCALER PARA 1:4
-    bsf	    T0CON,T0PS0   ;1
+    bcf	    T0CON,T0PS0   ;0
   
   ;Inicializa timer
     movlw   0x00
@@ -106,20 +106,27 @@ INICIO:
     MOVLW   B'00001111'
     MOVWF   ADCON1 ; digital I/O pins
     MOVLW   0CFh ; Value used to
-    MOVLW   B'00000000'
+    MOVLW   B'00000001'
     MOVWF   TRISB
     
-    ;TENTANDO AJUSTAR O SPI MODE
-    MOVLW   B'00110000'
-    MOVWF   SSPCON1		; CONTROLE DO SPI MODE
-    MOVLW   B'11000000'
-    MOVWF   SSPSTAT		; LEITURA DO STATUS
+    MOVLW   B'00000100'
+    MOVWF   T2CON
+    MOVLW   .128
+    MOVWF   PR2
     
+    
+    ;TENTANDO AJUSTAR O SPI MODE
+    MOVLW   B'00110011'
+    MOVWF   SSPCON1		; CONTROLE DO SPI MODE
+    MOVLW   B'10000000'
+    MOVWF   SSPSTAT		; LEITURA DO STATUS
+    ; CKP = 1
+    ; CKE = 0
     ;TENTATIVA DE AJUSTAR O CLOCK
-    MOVLW   B'00010111'
-    MOVWF   OSCCON
-    MOVLW   B'10010000'
-    MOVWF   OSCTUNE
+    ;MOVLW   B'00010111'
+    ;MOVWF   OSCCON
+    ;MOVLW   B'10010000'
+    ;MOVWF   OSCTUNE
     
     ;MOVLW   B'01100111'
     ;MOVWF   OSCCON
@@ -130,30 +137,83 @@ loop
     ;nop   
     BSF	    LATA,2
     BCF	    LATA,2
+;DELAY1
+;    BTFSS   INTCON,TMR0IF
+;    GOTO    DELAY1
+    
+    ;BCF	    LATA,2
     ; Serial Data Out (SDO) ? RC7/RX/DT/SDO
     ; Serial Clock (SCK) ? RB1/AN10/INT1/SCK/SCL
     ; CKE E CKP CONTROLAM O MODO DE OPERAÇÃO DO CLOCK DO MASTER
     ; CKE = 1, CKP = 1 ESCOLHIDO POR MARISMAR
-    
+    ; CKE = 0, CKP = 1 ESCOLHIDO POR MARISMAR
     ;MOVLW   B'00111000'
     ;MOVWF   SSPBUF
     ;MOVLW   B'01100100'
     ;MOVWF   SSPBUF
-    MOVLW   B'10111011'
-    MOVWF   SSPBUF
-    
-    BCF	    INTCON,TMR0IF
-DELAY1
-    BTFSS   INTCON,TMR0IF
-    GOTO    DELAY1
-    
-    ;MOVLW   B'01000010'
-    ;MOVWF   SSPBUF
     
     ;BCF	    INTCON,TMR0IF
-;DELAY
-    ;BTFSS   INTCON,TMR0IF
-    ;GOTO    DELAY
+    
+    ;CLRF    PR2
+    ;MOVLW   .128
+    ;MOVWF   TMR2
+    
+    MOVLW   B'01000111'; -----------------------------
+    MOVWF   SSPBUF
+    
+;DELAY2
+;    BTFSS   INTCON,TMR0IF
+;    GOTO    DELAY2
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    BCF	    LATA,2
+;    MOVLW   B'01100011'
+;    MOVWF   SSPBUF
+    
+    
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    ;BCF	    LATA,2
+;    MOVLW   B'10101010'
+;    MOVWF   SSPBUF
+    
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+;    NOP
+    ;BCF	    INTCON,TMR0IF
     
     GOTO loop
 end
