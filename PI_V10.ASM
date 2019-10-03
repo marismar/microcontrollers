@@ -1,5 +1,5 @@
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-;*              MODIFICA«’ES PARA USO COM 12F675                   *
+;*              MODIFICA√á√ïES PARA USO COM 12F675                   *
 ;*                FEITAS PELO PROF. MARDSON                        *
 ;*                      JUNHO DE 2019                              *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -8,9 +8,9 @@
 ;*                       NOME DO PROJETO                           *
 ;*                           CLIENTE                               *
 ;*         DESENVOLVIDO PELA MOSAICO ENGENHARIA E CONSULTORIA      *
-;*   VERS√O: 1.0                           DATA: 17/06/03          *
+;*   VERS√ÉO: 1.0                           DATA: 17/06/03          *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-;*                     DESCRI«√O DO ARQUIVO                        *
+;*                     DESCRI√á√ÉO DO ARQUIVO                        *
 ;*-----------------------------------------------------------------*
 ;*   MODELO PARA O PIC 12F675                                      *
 ;*                                                                 *
@@ -18,50 +18,51 @@
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-;*                     ARQUIVOS DE DEFINI«’ES                      *
+;*                     ARQUIVOS DE DEFINI√á√ïES                      *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-#INCLUDE <p12f675.inc>	;ARQUIVO PADR√O MICROCHIP PARA 12F675
+#INCLUDE <p12f675.inc>	;ARQUIVO PADR√ÉO MICROCHIP PARA 12F675
 
 	__CONFIG _BODEN_OFF & _CP_OFF & _PWRTE_ON & _WDT_OFF & _MCLRE_ON & _INTRC_OSC_NOCLKOUT
 
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-;*                    PAGINA«√O DE MEM”RIA                         *
+;*                    PAGINA√á√ÉO DE MEM√ìRIA                         *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-;DEFINI«√O DE COMANDOS DE USU¡RIO PARA ALTERA«√O DA P¡GINA DE MEM”RIA
-#DEFINE	BANK0	BCF STATUS,RP0	;SETA BANK 0 DE MEM”RIA
-#DEFINE	BANK1	BSF STATUS,RP0	;SETA BANK 1 DE MAM”RIA
+;DEFINI√á√ÉO DE COMANDOS DE USU√ÅRIO PARA ALTERA√á√ÉO DA P√ÅGINA DE MEM√ìRIA
+#DEFINE	BANK0	BCF STATUS,RP0	;SETA BANK 0 DE MEM√ìRIA
+#DEFINE	BANK1	BSF STATUS,RP0	;SETA BANK 1 DE MAM√ìRIA
 
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-;*                         VARI¡VEIS                               *
+;*                         VARI√ÅVEIS                               *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-; DEFINI«√O DOS NOMES E ENDERE«OS DE TODAS AS VARI¡VEIS UTILIZADAS 
+; DEFINI√á√ÉO DOS NOMES E ENDERE√áOS DE TODAS AS VARI√ÅVEIS UTILIZADAS 
 ; PELO SISTEMA
 
-	CBLOCK	0x20	;ENDERE«O INICIAL DA MEM”RIA DE
-					;USU¡RIO
-		W_TEMP		;REGISTRADORES TEMPOR¡RIOS PARA USO
-		STATUS_TEMP	;JUNTO ¿S INTERRUP«’ES
+	CBLOCK	0x20	;ENDERE√áO INICIAL DA MEM√ìRIA DE
+					;USU√ÅRIO
+		W_TEMP		;REGISTRADORES TEMPOR√ÅRIOS PARA USO
+		STATUS_TEMP	;JUNTO √ÄS INTERRUP√á√ïES
 		
 		COUNTER		; SABER SE CHEGOU UM BYTE
 		VAR		; USADA NO ROTATE
-		DADO		; VARI¡VEL QUE … ENVIADA
+		DADO		; VARI√ÅVEL QUE √â ENVIADA
 		FLAG		; INDICA QUE O BYTE CHEGOU
 		AUX1		; 
 		AUX2		; GUARDA O VALOR DO DADO_2 E DADO_3
 		AUX3		; GUARDA O VALOR DO DADO_1 E DADO_0
 		AUX4		; GUARDA O NIBBLE MAIS SIGNIFICATIVO DE AUX3
 		AUX5		; GUARDA O NIBBLE MAIS SIGNIFICATIVO DE AUX2  
-		CHECK_SUM	; VERIFICA SE OS DADOS EST√O CORRETOS
-		;ADRS		; ENDERE«O A SER IMPRESSO
+		CHECK_SUM	; VERIFICA SE OS DADOS EST√ÉO CORRETOS
+		VARH
+		;ADRS		; ENDERE√áO A SER IMPRESSO
 		COUNTER2
-		;NOVAS VARI¡VEIS
+		;NOVAS VARI√ÅVEIS
 
-	ENDC			;FIM DO BLOCO DE MEM”RIA
+	ENDC			;FIM DO BLOCO DE MEM√ìRIA
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ;*                        FLAGS INTERNOS                           *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-; DEFINI«√O DE TODOS OS FLAGS UTILIZADOS PELO SISTEMA
-	#DEFINE	FLAG_0  FLAG,0		    ; AQUI INDICA QUE … O PRIMEIRO BYTE CHEGOU
+; DEFINI√á√ÉO DE TODOS OS FLAGS UTILIZADOS PELO SISTEMA
+	#DEFINE	FLAG_0  FLAG,0		    ; AQUI INDICA QUE √â O PRIMEIRO BYTE CHEGOU
 	#DEFINE	SEM_ERRO  FLAG,1	    ; SINALIZA SE HOUVE ERRO
 	#DEFINE	TIME_OUT  FLAG,2   
 	
@@ -69,45 +70,45 @@
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ;*                         CONSTANTES                              *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-; DEFINI«√O DE TODAS AS CONSTANTES UTILIZADAS PELO SISTEMA
+; DEFINI√á√ÉO DE TODAS AS CONSTANTES UTILIZADAS PELO SISTEMA
 
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ;*                           ENTRADAS                              *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-; DEFINI«√O DE TODOS OS PINOS QUE SER√O UTILIZADOS COMO ENTRADA
-; RECOMENDAMOS TAMB…M COMENTAR O SIGNIFICADO DE SEUS ESTADOS (0 E 1)
+; DEFINI√á√ÉO DE TODOS OS PINOS QUE SER√ÉO UTILIZADOS COMO ENTRADA
+; RECOMENDAMOS TAMB√âM COMENTAR O SIGNIFICADO DE SEUS ESTADOS (0 E 1)
 
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-;*                           SAÕDAS                                *
+;*                           SA√çDAS                                *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-; DEFINI«√O DE TODOS OS PINOS QUE SER√O UTILIZADOS COMO SAÕDA
-; RECOMENDAMOS TAMB…M COMENTAR O SIGNIFICADO DE SEUS ESTADOS (0 E 1)
+; DEFINI√á√ÉO DE TODOS OS PINOS QUE SER√ÉO UTILIZADOS COMO SA√çDA
+; RECOMENDAMOS TAMB√âM COMENTAR O SIGNIFICADO DE SEUS ESTADOS (0 E 1)
 
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ;*                       VETOR DE RESET                            *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
-	ORG	0x00			;ENDERE«O INICIAL DE PROCESSAMENTO
+	ORG	0x00			;ENDERE√áO INICIAL DE PROCESSAMENTO
 	GOTO	INICIO
 	
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-;*                    INÕCIO DA INTERRUP«√O                        *
+;*                    IN√çCIO DA INTERRUP√á√ÉO                        *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-; ENDERE«O DE DESVIO DAS INTERRUP«’ES. A PRIMEIRA TAREFA … SALVAR OS
-; VALORES DE "W" E "STATUS" PARA RECUPERA«√O FUTURA
+; ENDERE√áO DE DESVIO DAS INTERRUP√á√ïES. A PRIMEIRA TAREFA √â SALVAR OS
+; VALORES DE "W" E "STATUS" PARA RECUPERA√á√ÉO FUTURA
 
-	ORG	0x04			;ENDERE«O INICIAL DA INTERRUP«√O
+	ORG	0x04			;ENDERE√áO INICIAL DA INTERRUP√á√ÉO
 	MOVWF	W_TEMP		;COPIA W PARA W_TEMP
 	SWAPF	STATUS,W
 	MOVWF	STATUS_TEMP	;COPIA STATUS PARA STATUS_TEMP
 
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-;*                    ROTINA DE INTERRUP«√O                        *
+;*                    ROTINA DE INTERRUP√á√ÉO                        *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-; AQUI SER√O ESCRITAS AS ROTINAS DE RECONHECIMENTO E TRATAMENTO DAS
-; INTERRUP«’ES
+; AQUI SER√ÉO ESCRITAS AS ROTINAS DE RECONHECIMENTO E TRATAMENTO DAS
+; INTERRUP√á√ïES
 
-	BTFSC	GPIO,GP1    ;O QUE … LIDO … DIRETAMENTE ENVIADO
+	BTFSC	GPIO,GP1    ;O QUE √â LIDO √â DIRETAMENTE ENVIADO
 	GOTO	SETA
 	
 	BCF	STATUS,C
@@ -126,10 +127,10 @@ CONTINUA
 	BCF	INTCON,INTF
 	
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-;*                 ROTINA DE SAÕDA DA INTERRUP«√O                  *
+;*                 ROTINA DE SA√çDA DA INTERRUP√á√ÉO                  *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ; OS VALORES DE "W" E "STATUS" DEVEM SER RECUPERADOS ANTES DE 
-; RETORNAR DA INTERRUP«√O
+; RETORNAR DA INTERRUP√á√ÉO
 
 SAI_INT
 	SWAPF	STATUS_TEMP,W
@@ -141,8 +142,8 @@ SAI_INT
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ;*	            	 ROTINAS E SUBROTINAS                      *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-; CADA ROTINA OU SUBROTINA DEVE POSSUIR A DESCRI«√O DE FUNCIONAMENTO
-; E UM NOME COERENTE ¿S SUAS FUN«’ES.
+; CADA ROTINA OU SUBROTINA DEVE POSSUIR A DESCRI√á√ÉO DE FUNCIONAMENTO
+; E UM NOME COERENTE √ÄS SUAS FUN√á√ïES.
 
 ENVIA			; ************ SUBROTINA 1 *******************
 	RLF	DADO	    ; RECEBE TODOS OS VALORES PARA SEREM ENVIADOS
@@ -166,7 +167,7 @@ FIM_ENVIA
 	
 	RETURN
 
-; ************************** FUN«√O DE VERIFICA«√O DE ERRO ***************************
+; ************************** FUN√á√ÉO DE VERIFICA√á√ÉO DE ERRO ***************************
 VER_ERRO
 	MOVF	AUX3,W
 	ADDWF	AUX2		   ; VERIFICAR SE A SOMA PASSOU DE 255
@@ -174,7 +175,7 @@ VER_ERRO
 	
 	BTFSC	STATUS,C
 	GOTO	ESTOUROU	   ; SOMA PASSOU DE 255	    
-				   ; SE N√O PASSOU SHOW DE BOLA 
+				   ; SE N√ÉO PASSOU SHOW DE BOLA 
 SUBTRAI
 	SUBWF	CHECK_SUM
 	BTFSS	STATUS,C
@@ -186,7 +187,7 @@ SUBTRAI
 	GOTO	ENCONTREI_ERRO
 	GOTO	NAO_DEU_ERRO
 
-ESTOUROU			    ; S” ANALISO O NIBBLE MENOS SIGNIFICATIVO
+ESTOUROU			    ; S√ì ANALISO O NIBBLE MENOS SIGNIFICATIVO
 	BCF	STATUS,C	    ; DESLOCA O NIBBLE MENOS SIGNIFICATIVO
 	RLF	AUX2		    ; E FAZ UM SWAPF NO FINAL
 	DECFSZ	VAR
@@ -205,10 +206,15 @@ FIM_VER_ERRO
 	RETURN
 	
 ; ******************************* DELAY PARA IMPRIMIR NOS DISPLAYS **************************
-DELAY
+DELAY	
+	MOVF	VARH,W
+	MOVWF	TMR1H
+	MOVF	FLAG,W
+	MOVWF	TMR1L
+LOOP_DELAY
 	BTFSS	PIR1,TMR1IF	;VERIFICA SE HOUVE ESTOURO NA FLAG
-	GOTO	DELAY
-	BCF	T1CON,0	    ; DESABILITA O TIMER1
+	GOTO	LOOP_DELAY
+	;BCF	T1CON,0	    ; DESABILITA O TIMER1
 	BCF	PIR1,TMR1IF
 	RETURN
 	
@@ -219,7 +225,7 @@ MEU_DADO0
 	DECFSZ	VAR
 	GOTO	MEU_DADO0
 	   
-	MOVLW	B'00001000'     ; ENDERE«O DO DISPLAY 1	
+	MOVLW	B'00001000'     ; ENDERE√áO DO DISPLAY 1	
 	IORWF	DADO,W		; 
 	MOVWF	DADO	
 	MOVLW	.4
@@ -233,7 +239,7 @@ MEU_DADO1
 	DECFSZ	VAR
 	GOTO	MEU_DADO1
 	   
-	MOVLW	B'00000100'     ; ENDERE«O DO DISPLAY 2	
+	MOVLW	B'00000100'     ; ENDERE√áO DO DISPLAY 2	
 	IORWF	DADO,W		; 
 	MOVWF	DADO	
 	MOVLW	.4
@@ -247,7 +253,7 @@ MEU_DADO2
 	DECFSZ	VAR
 	GOTO	MEU_DADO2
 	   
-	MOVLW	B'00000010'     ; ENDERE«O DO DISPLAY 3	
+	MOVLW	B'00000010'     ; ENDERE√áO DO DISPLAY 3	
 	IORWF	DADO,W		; 
 	MOVWF	DADO	
 	MOVLW	.4
@@ -261,7 +267,7 @@ MEU_DADO3
 	DECFSZ	VAR
 	GOTO	MEU_DADO3
 	   
-	MOVLW	B'00000001'     ; ENDERE«O DO DISPLAY 4	
+	MOVLW	B'00000001'     ; ENDERE√áO DO DISPLAY 4	
 	IORWF	DADO,W		; 
 	MOVWF	DADO	
 	MOVLW	.4
@@ -274,22 +280,22 @@ MEU_DADO3
 INICIO
 	BANK1				;ALTERA PARA O BANCO 1
 	MOVLW	B'00000110'	;CONFIGURA TODAS AS PORTAS DO GPIO (PINOS)
-	MOVWF	TRISIO		;COMO SAÕDAS
+	MOVWF	TRISIO		;COMO SA√çDAS
 	CLRF	ANSEL 		;DEFINE PORTAS COMO Digital I/O
 	MOVLW	B'01000000'
-	MOVWF	OPTION_REG	;DEFINE OP«’ES DE OPERA«√O
-	MOVLW	B'00000000'	;INTERRUP«√O DE PERIF…RICO HABILITADO
-	MOVWF	INTCON		;DEFINE OP«’ES DE INTERRUP«’ES
+	MOVWF	OPTION_REG	;DEFINE OP√á√ïES DE OPERA√á√ÉO
+	MOVLW	B'00000000'	;INTERRUP√á√ÉO DE PERIF√âRICO HABILITADO
+	MOVWF	INTCON		;DEFINE OP√á√ïES DE INTERRUP√á√ïES
 	;CALL	0X3FF
 	;MOVWF	OSCCAL
 	
 	BANK0				;RETORNA PARA O BANCO
-	MOVLW	B'00000111'	; 011 CONFIGURA«√O DO COMPARADOR
-	MOVWF	CMCON		;DEFINE O MODO DE OPERA«√O DO COMPARADOR ANAL”GICO
+	MOVLW	B'00000111'	; 011 CONFIGURA√á√ÉO DO COMPARADOR
+	MOVWF	CMCON		;DEFINE O MODO DE OPERA√á√ÉO DO COMPARADOR ANAL√ìGICO
 	MOVLW	B'00100000'	;PRESCALE DE 1:2
 	MOVWF	T1CON
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-;*                     INICIALIZA«√O DAS VARI¡VEIS                 *
+;*                     INICIALIZA√á√ÉO DAS VARI√ÅVEIS                 *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	MOVLW	.8
 	MOVWF	COUNTER		    
@@ -304,36 +310,35 @@ INICIO
 	MOVLW	.3
 	MOVWF	COUNTER2
 	CLRF	TMR1L
-	;CLRF	TMR1H
 
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ;*                     ROTINA PRINCIPAL                            *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 MAIN
-	; ------------------ PARTE DE SINCRONIZA«√O PRONTA (FUNCIONA) ------------------
+	; ------------------ PARTE DE SINCRONIZA√á√ÉO PRONTA (FUNCIONA) ------------------
 
 	MOVLW	.235
 	MOVWF	TMR0
 TESTA
-	BTFSS	GPIO,GP2    ; GP2 EM HIGH POR 50us
-	GOTO	MAIN	    ;ENQUANTO GP2, REINICIE O TMR0
-	BTFSS	INTCON,T0IF ; SE GP2=1 NUM TEMPO SUFICIENTE
-	GOTO	TESTA	    ; SE GP2=0, ANTES QUE ESTOURE, … ZERADO O TMR0
+	BTFSS	GPIO,GP2	    ; GP2 EM HIGH POR 50us
+	GOTO	MAIN		    ;ENQUANTO GP2, REINICIE O TMR0
+	BTFSS	INTCON,T0IF	    ; SE GP2=1 NUM TEMPO SUFICIENTE
+	GOTO	TESTA		    ; SE GP2=0, ANTES QUE ESTOURE, √â ZERADO O TMR0
 	
-	MOVLW	B'10010000'	; HABILITO INTERRUP«√O POR TMR0 TAMB…M
+	MOVLW	B'10010000'	    ; HABILITO INTERRUP√á√ÉO POR TMR0 TAMB√âM
 	MOVWF	INTCON
-	BCF	FLAG_0	    ; FLAG QUE INDICA SE TODOS OS DADOS FORAM RECEBIDOS
+	BCF	FLAG_0		    ; FLAG QUE INDICA SE TODOS OS DADOS FORAM RECEBIDOS
 	BSF	T1CON,0
-	MOVLW	.250
+	MOVLW	.210
 	MOVWF	TMR1H
 	
-LOOP			    ; ESPERA A INTERRUP«√O DE RECEBIMENTO DOS DADOS
-	BTFSC	FLAG_0	    ; PRECISO ENVIAR OS DADOS NO LOOP
+LOOP				    ; ESPERA A INTERRUP√á√ÉO DE RECEBIMENTO DOS DADOS
+	BTFSC	FLAG_0		    ; PRECISO ENVIAR OS DADOS NO LOOP
 	GOTO	GUARDA_BYTE
-				;TIME-OUT DE 6ms
+				    ;TIME-OUT DE 6ms
 	BTFSC	PIR1,TMR1IF
-	GOTO	DEU_CERTO	    ; CASO D  TIME-OUT EXIBE O QUE J¡ FOI SALVO NAS VARI¡VEIS	
-	GOTO	LOOP		    ; SE N√O TIVER NADA SER¡ EXIBIDO 0 0 0 0 EM TODOS OS DISPLAYS
+	GOTO	DEU_CERTO	    ; CASO D√ä TIME-OUT EXIBE O QUE J√Å FOI SALVO NAS VARI√ÅVEIS	
+	GOTO	LOOP		    ; SE N√ÉO TIVER NADA SER√Å EXIBIDO 0 0 0 0 EM TODOS OS DISPLAYS
 	
 GUARDA_BYTE
 	BCF	T1CON,0
@@ -379,7 +384,7 @@ TESTE
 	
 ESPERA_PROXIMO_BYTE	
 	MOVLW	.8	    ; RENOVA O VALOR DE COUNTER
-	MOVWF	COUNTER	    ; AP”S O ENVIO DOS 8 BITS
+	MOVWF	COUNTER	    ; AP√ìS O ENVIO DOS 8 BITS
 	BCF	FLAG_0
 	BSF	T1CON,0
 	CLRF	TMR1L
@@ -387,11 +392,11 @@ ESPERA_PROXIMO_BYTE
 	MOVWF	TMR1H
 	BCF	PIR1,TMR1IF
 	GOTO	LOOP
-; *************** FINAL DA PARTE DE SINCRONIZA«√O ********************	
+; *************** FINAL DA PARTE DE SINCRONIZA√á√ÉO ********************	
 	
 DEU_CERTO
-	BCF	T1CON,0
-	CLRF	INTCON
+	;BCF	T1CON,0
+	CLRF	INTCON	    ; CASO ESTOURE O TIME-OUT
 	
 	MOVLW	.8
 	MOVWF	COUNTER
@@ -403,98 +408,78 @@ DEU_CERTO
 	CALL	VER_ERRO
 	MOVF	AUX1,W
 	MOVWF	AUX2
-	;********************** SE«√O DE ENVIO ( MUDAR A ORDEM DOS NIBBLES DEPOIS ) ********************
-	BTFSC	SEM_ERRO    ; SEM_ERRO = 0, ENT√O DEU TUDO CERTO
+	;********************** SE√á√ÉO DE ENVIO ( MUDAR A ORDEM DOS NIBBLES DEPOIS ) ********************
+	BTFSC	SEM_ERRO    ; SEM_ERRO = 0, ENT√ÉO DEU TUDO CERTO
 	GOTO	DEU_RUIM
 
-;TENTANDO_DEBUGAR
-	
+TESTANDO
+	BSF	T1CON,0
+	MOVLW	.253
+	MOVWF	VARH
+	MOVLW	.255
+	MOVWF	FLAG
+;CASO N√ÉO EXISTA ERRO NOS DADOS OS VALORES S√ÉO MOSTRADOS NOS DISPLAYS
 	MOVF 	AUX3,W		; ESSA PARTE FUNCIONA
 	MOVWF	DADO
 	CALL	MEU_DADO0
 	CALL	ENVIA
-	
-	BSF	T1CON,0		 ;TEMPO DO DELAY
-	MOVLW	.255
-	MOVWF	TMR1L
-	MOVLW	.253
-	MOVWF	TMR1H
 	CALL	DELAY
 	
 	MOVF	AUX5,W
 	MOVWF	DADO
 	CALL	MEU_DADO1
 	CALL	ENVIA
-	
-	BSF	T1CON,0
-	MOVLW	.255
-	MOVWF	TMR1L
-	MOVLW	.253
-	MOVWF	TMR1H
 	CALL	DELAY
 	
 	MOVF	AUX2,W		; ESSA PARTE FUNCIONA
 	MOVWF	DADO
 	CALL	MEU_DADO2
 	CALL	ENVIA
-	
-	BSF	T1CON,0
-	MOVLW	.255
-	MOVWF	TMR1L
-	MOVLW	.253
-	MOVWF	TMR1H
 	CALL	DELAY
 	
 	MOVF	AUX4,W
 	MOVWF	DADO
 	CALL	MEU_DADO3
 	CALL	ENVIA
-	
-	BSF	T1CON,0
-	MOVLW	.255
-	MOVWF	TMR1L
-	MOVLW	.253
-	MOVWF	TMR1H
 	CALL	DELAY
 	
 	CLRF	TMR1L
 	CLRF	TMR1H
-	BCF	PIR1,TMR1IF
 	BCF	T1CON,0	
-	GOTO	MAIN	
+	MOVLW	.0
+	MOVWF	FLAG		
+	GOTO	INICIO
+	;GOTO	TESTANDO
 	
 DEU_RUIM
-	BCF	PIR1,TMR1IF
-	MOVLW	B'00001111'	; PRINTA ZERO EM TODOS OS DISPLAYS
+	
+	MOVLW	B'00011111'	; PRINTA ZERO EM TODOS OS DISPLAYS
 	MOVWF	DADO		; 
 	CALL	ENVIA
 	BSF	T1CON,0
-	CLRF	TMR1L
+	
+	MOVLW	.0
+	MOVWF	FLAG
 	MOVLW	.60
-	MOVWF	TMR1H
-	;CLRF	TMR1H
+	MOVWF	VARH
+	BCF	PIR1,TMR1IF
 	CALL	DELAY		; DELAY DE ALERTA POR 200ms
 	
 	MOVLW	B'00000000'	; DESLIGA TODO MUNDO POR 200ms
 	MOVWF	DADO		
 	CALL	ENVIA
-	BSF	T1CON,0
-	CLRF	TMR1L
-	MOVLW	.60
-	MOVWF	TMR1H
-	;CLRF	TMR1H
 	CALL	DELAY
-			    
+	
+	MOVLW	.0
+	MOVWF	FLAG
 	MOVLW	.4
 	MOVWF	VAR
 	CLRF	INTCON
 	CLRF	TMR1L
 	CLRF	TMR1H
-	BCF	PIR1,TMR1IF
 	BCF	T1CON,0
 	
-	GOTO	MAIN
-	;GOTO	INICIO		;FUNCIONA QUANDO VAI PARA O INICIO	
+	GOTO	MAIN	
 
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ;*                       FIM DO PROGRAMA                           *
