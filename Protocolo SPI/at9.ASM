@@ -1,14 +1,14 @@
 #INCLUDE <p12f675.inc>	
 	__CONFIG _BODEN_OFF & _CP_OFF & _PWRTE_ON & _WDT_OFF & _MCLRE_ON & _INTRC_OSC_NOCLKOUT
 
-;DEFINI«√O DE COMANDOS DE USU¡RIO PARA ALTERA«√O DA P¡GINA DE MEM”RIA
-#DEFINE	BANK0	BCF STATUS,RP0	;SETA BANK 0 DE MEM”RIA
-#DEFINE	BANK1	BSF STATUS,RP0	;SETA BANK 1 DE MAM”RIA
+;DEFINI√á√ÉO DE COMANDOS DE USU√ÅRIO PARA ALTERA√á√ÉO DA P√ÅGINA DE MEM√ìRIA
+#DEFINE	BANK0	BCF STATUS,RP0	;SETA BANK 0 DE MEM√ìRIA
+#DEFINE	BANK1	BSF STATUS,RP0	;SETA BANK 1 DE MAM√ìRIA
 
-	CBLOCK	0x20	;ENDERE«O INICIAL DA MEM”RIA DE
-					;USU¡RIO
-		W_TEMP		;REGISTRADORES TEMPOR¡RIOS PARA USO
-		STATUS_TEMP	;JUNTO ¿S INTERRUP«’ES
+	CBLOCK	0x20	;ENDERE√áO INICIAL DA MEM√ìRIA DE
+					;USU√ÅRIO
+		W_TEMP		;REGISTRADORES TEMPOR√ÅRIOS PARA USO
+		STATUS_TEMP	;JUNTO √ÄS INTERRUP√á√ïES
 		REMAINING
 		BYTE		; byte a ser enviado para o display usado na rotina SEND_BYTE
 		BYTE1		; primeiro byte a ser enviado para o display
@@ -19,16 +19,16 @@
 		COUNTER		; variavel auxiliar 
 		
 
-	ENDC			;FIM DO BLOCO DE MEM”RIA
+	ENDC			;FIM DO BLOCO DE MEM√ìRIA
 
-	ORG	0x00			;ENDERE«O INICIAL DE PROCESSAMENTO
+	ORG	0x00			;ENDERE√áO INICIAL DE PROCESSAMENTO
 	GOTO	INICIO
 	
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-;*                    INÕCIO DA INTERRUP«√O                        *
+;*                    IN√çCIO DA INTERRUP√á√ÉO                        *
 ;* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
-	ORG	0x04			;ENDERE«O INICIAL DA INTERRUP«√O
+	ORG	0x04			;ENDERE√áO INICIAL DA INTERRUP√á√ÉO
 	MOVWF	W_TEMP		;COPIA W PARA W_TEMP
 	SWAPF	STATUS,W
 	MOVWF	STATUS_TEMP	;COPIA STATUS PARA STATUS_TEMP
@@ -47,7 +47,7 @@ SAI_INT
 
 READ_TEMPERATURE ; LE A TEMPERATURA PELO CONVERSOR A/D 
 
-	BSF	ADCON0,GO ; comeÁa conversao a/d
+	BSF	ADCON0,GO ; come√ßa conversao a/d
 	
 WAIT_CONVERSION
 	BTFSC	ADCON0,GO
@@ -57,19 +57,19 @@ WAIT_CONVERSION
 	
 	
 	
-CALCULATE_BYTES ; calcula os bytes que ser„o transmitidos ao display
-	; o conversor a/d est· com uma referencia Vref = 0.4V
-	; assim ele vai ler atÈ uma temperatura de 40 graus
-	;  (temperaturas maiores ser„o lidas como a temperatura maxima)
-	; e o resultado da convers„o est· configurado para ser justificado a direita
-	; com isso o resultado da convers„o em ADRESH j· È o digito mais significativo da convers„o (primeiro display)
+CALCULATE_BYTES ; calcula os bytes que ser√£o transmitidos ao display
+	; o conversor a/d est√° com uma referencia Vref = 0.4V
+	; assim ele vai ler at√© uma temperatura de 40 graus
+	;  (temperaturas maiores ser√£o lidas como a temperatura maxima)
+	; e o resultado da convers√£o est√° configurado para ser justificado a direita
+	; com isso o resultado da convers√£o em ADRESH j√° √© o digito mais significativo da convers√£o (primeiro display)
 	
 	MOVFW	ADRESH
 	MOVWF	BYTE1
 	SWAPF	BYTE1,F
 	
 	; o valor em ADRESL representa o valor restante, onde 0 represent 0 graus e 256 representaria 10 graus
-	; ent„o cada 25,6 unidades em ADRESL representa 1 unidade de temperatura (segundo display)
+	; ent√£o cada 25,6 unidades em ADRESL representa 1 unidade de temperatura (segundo display)
 	BANK1
 	MOVFW	ADRESL
 	BANK0
@@ -91,7 +91,7 @@ DIV_D2
 
 CALC_DISPLAY3
 	; aqui temos um valor entre 0 e 25 restante
-	; podemos multiplicar esse valor por 2, para melhorar a precis„o dos proximos calculos
+	; podemos multiplicar esse valor por 2, para melhorar a precis√£o dos proximos calculos
 	BCF	STATUS,C
 	RLF	REMAINING ; multiplica por 2
 	; agora temos um valor restante entre 0 e 50, onde cada 5 unidades representa 1 unidade no display 3
@@ -181,10 +181,10 @@ SEND_CARRY_ZERO
 SEND_BYTE ; envia o byte que esta no W para o display via SPI
 	MOVWF	BYTE
 	; a frequencia do clock deve ser no maximo 50kHz
-	; portanto o periodo minimo È de 20us (sera um pouco maior por precaucao)
+	; portanto o periodo minimo √© de 20us (sera um pouco maior por precaucao)
 	
 	; ao rotacionar um file para a esquerda com RFL o bit mais significativo
-	; È transportado para o carry (STATUS,C), entao isso ser· usado para 
+	; √© transportado para o carry (STATUS,C), entao isso ser√° usado para 
 	; determinar o bit a ser enviado para o display
 	
 	MOVLW	.9
@@ -239,14 +239,14 @@ INICIO
 	MOVLW	B'00010110'
 	MOVWF	ANSEL ; CONFIGURA CONVERSOR A/D EM AN2 E ENTRADADO VREF EM AN1
 	MOVLW	B'10000100'
-	MOVWF	OPTION_REG	;DEFINE OP«’ES DE OPERA«√O
+	MOVWF	OPTION_REG	;DEFINE OP√á√ïES DE OPERA√á√ÉO
 	MOVLW	B'00000000'
-	MOVWF	INTCON		;DEFINE OP«’ES DE INTERRUP«’ES
+	MOVWF	INTCON		;DEFINE OP√á√ïES DE INTERRUP√á√ïES
 	CALL	3FFh
 	MOVWF	OSCCAL
 	BANK0				;RETORNA PARA O BANCO
 	MOVLW	B'00000111'
-	MOVWF	CMCON		;DEFINE O MODO DE OPERA«√O DO COMPARADOR ANAL”GICO
+	MOVWF	CMCON		;DEFINE O MODO DE OPERA√á√ÉO DO COMPARADOR ANAL√ìGICO
 	MOVLW	B'11001001'
 	MOVWF	ADCON0	; HABILITA E CONFIGURA CONVERSOR A/D NO CANAL 2, JUSTIFICADA A DIREITA
 
