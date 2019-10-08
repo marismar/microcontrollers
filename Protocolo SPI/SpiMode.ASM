@@ -1,22 +1,22 @@
 ; Placa de aprendizagem: uStart for PIC   
-; ProgramaÁ„o em Assembly do PIC18F4550 
+; Programa√ß√£o em Assembly do PIC18F4550 
 ; Autor: Marismar Costa
     
   list p=18f4550, r=hex
   #include <p18f4550.inc>  
     CONFIG  FOSC = INTOSC_EC      ; Oscillator Selection bits (Internal oscillator, CLKO function on RA6, EC used by USB (INTCKO))
-    org 0x0000 ;Inicia o programa no endereÁo de memÛria 0x00
+    org 0x0000 ;Inicia o programa no endere√ßo de mem√≥ria 0x00
     goto INICIO 
 
-    org 0x0008 ;InterrupÁ„o de alta prioridade, desvia para endereÁo 0x08
+    org 0x0008 ;Interrup√ß√£o de alta prioridade, desvia para endere√ßo 0x08
     goto HI_INT
 
-    org 0x0018 ;interrupÁ„o de baixa prioridade, desvia para endereÁo 0x18
+    org 0x0018 ;interrup√ß√£o de baixa prioridade, desvia para endere√ßo 0x18
     goto LOW_INT
   
-;####### INTERRUP«√O DE ALTA PRIORIDADE ########
+;####### INTERRUP√á√ÉO DE ALTA PRIORIDADE ########
 HI_INT:
-;EspaÁo para execuÁ„o em alta prioridade
+;Espa√ßo para execu√ß√£o em alta prioridade
 ;----------------------------------------
     
     btfss INTCON,TMR0IF
@@ -40,9 +40,9 @@ HI_INT:
   retfie ;Volta ao curso do programa  
 ;################################################ 
   
-;####### INTERRUP«√O DE BAIXA PRIORIDADE ########
+;####### INTERRUP√á√ÉO DE BAIXA PRIORIDADE ########
 LOW_INT:
-;EspaÁo para execuÁ„o em baixa prioridade
+;Espa√ßo para execu√ß√£o em baixa prioridade
 ;----------------------------------------
     
     NOP
@@ -52,29 +52,29 @@ LOW_INT:
 ;################################################
   
   
-;##### INCIALIZA«√O DE VARI¡VEIS #####
-  CBLOCK	0x10	;ENDERE«O INICIAL DA MEM”RIA DE USU¡RIO
+;##### INCIALIZA√á√ÉO DE VARI√ÅVEIS #####
+  CBLOCK	0x10	;ENDERE√áO INICIAL DA MEM√ìRIA DE USU√ÅRIO
 			
 		counter
-		;NOVAS VARI¡VEIS
-	ENDC		;FIM DO BLOCO DE MEM”RIA
+		;NOVAS VARI√ÅVEIS
+	ENDC		;FIM DO BLOCO DE MEM√ìRIA
 
 ;######### ROTINA PRINCIPAL DO PROGRAMA #########
 INICIO:
     CLRF	    counter 
   ;--------------------------------------
 
-  ;LATA È usado em s·idas Digitais
-  ;PORTA È usado em entradas TTL
-    MOVLW   B'00000000' ;Define todas as portas de TRISA como saÌdas
+  ;LATA √© usado em s√°idas Digitais
+  ;PORTA √© usado em entradas TTL
+    MOVLW   B'00000000' ;Define todas as portas de TRISA como sa√≠das
     MOVWF   TRISA
-    BCF	    LATA,2	    ;Outra forma de definir RA1 como saÌda
+    BCF	    LATA,2	    ;Outra forma de definir RA1 como sa√≠da
   
   ;INTCON (1,2 e 3) funcionam de acordo com os valores encontrados em RCON,IPEN
-  ;Neste caso, RCON,IPEN = 0 (incializaÁ„o padr„o)
-    bcf	    INTCON,GIE    ; Desabilita interrupÁıes globais
+  ;Neste caso, RCON,IPEN = 0 (incializa√ß√£o padr√£o)
+    bcf	    INTCON,GIE    ; Desabilita interrup√ß√µes globais
     bcf	    T0CON,TMR0ON  ; Desliga Timer 0
-    bsf	    INTCON,TMR0IE ; Habilita interrupÁ„o Timer 0
+    bsf	    INTCON,TMR0IE ; Habilita interrup√ß√£o Timer 0
     bcf	    T0CON,T08BIT  ; Utiliza modo de 16 bits
     bcf	    T0CON,T0CS    
     bcf	    T0CON,T0PS2   ;0
@@ -90,7 +90,7 @@ INICIO:
   ;INTCON2,TMR0IP define se o estouro do timer desvia para hi_int ou low_int
     bsf	    INTCON2,TMR0IP ; Timer 0 - INTCON2,TMR0IP = 1 - Alta prioridade
     bsf	    T0CON,TMR0ON   ; Timer 0 - Habilita Timer0
-    bcf	    INTCON,GIE     ; Habilita interrupÁıes globais
+    bcf	    INTCON,GIE     ; Habilita interrup√ß√µes globais
      
   
     CLRF    PORTC ; Initialize PORTC by
@@ -132,7 +132,7 @@ loop
     BCF	    LATA,2
     ; Serial Data Out (SDO) ? RC7/RX/DT/SDO
     ; Serial Clock (SCK) ? RB1/AN10/INT1/SCK/SCL
-    ; CKE E CKP CONTROLAM O MODO DE OPERA«√O DO CLOCK DO MASTER
+    ; CKE E CKP CONTROLAM O MODO DE OPERA√á√ÉO DO CLOCK DO MASTER
     ; CKE = 1, CKP = 1 ESCOLHIDO POR MARISMAR
     ; CKE = 0, CKP = 1 ESCOLHIDO POR MARISMAR
     ;MOVLW   B'00111000'
